@@ -1,0 +1,14 @@
+SELECT SUM(ssot__SalesOrder__dlm.ssot__TotalAmount__c) AS TotalAmount__c,
+IndividualIdentityLink__dlm.SourceRecordId__c AS Customer_Id__c,
+UnifiedIndividual__dlm.ssot__Id__c AS Unified_Individual__c
+FROM ssot__SalesOrder__dlm
+JOIN IndividualIdentityLink__dlm ON ssot__SalesOrder__dlm.Customer_Id__c = IndividualIdentityLink__dlm.SourceRecordId__c
+JOIN UnifiedIndividual__dlm ON IndividualIdentityLink__dlm.UnifiedRecordId__c = UnifiedIndividual__dlm.ssot__Id__c
+GROUP BY Customer_Id__c, Unified_Individual__c, IndividualIdentityLink__dlm.SourceRecordId__c
+
+
+
+
+
+
+SELECT * FROM "Total_Amount_Per_Customer__cio" order by "TotalAmount__c" DESC
